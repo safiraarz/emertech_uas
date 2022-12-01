@@ -7,19 +7,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../main.dart';
 import 'package:http/http.dart' as http;
 
-class MyLogin extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Color Mixer',
-      theme: ThemeData(
-        primarySwatch: Colors.blueGrey,
-      ),
-      home: Login(),
-    );
-  }
-}
-
 class Login extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -51,7 +38,7 @@ class _LoginState extends State<Login> {
       } else {
         ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text('Login failed. Recheck!')));
-            Navigator.of(context)
+        Navigator.of(context)
             .push(MaterialPageRoute(builder: (ctx) => Login()));
       }
     } else {
@@ -70,7 +57,7 @@ class _LoginState extends State<Login> {
           alignment: Alignment.topCenter,
           fit: BoxFit.fill,
           image: NetworkImage(
-            'https://voyage-onirique.com/wp-content/uploads/2020/01/656579-1120x630.jpg',
+            'https://learn.canva.com/wp-content/uploads/2015/11/desktop-wallpaper.jpg',
           ),
         ),
       ),
@@ -78,7 +65,7 @@ class _LoginState extends State<Login> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Container(
-            height: 450,
+            height: 400,
             width: double.infinity,
             decoration: BoxDecoration(
               color: Colors.white,
@@ -98,8 +85,8 @@ class _LoginState extends State<Login> {
                         color: Colors.blueGrey.shade200,
                         borderRadius: BorderRadius.circular(30)),
                     child: Padding(
-                      padding:
-                          const EdgeInsets.only(left: 25.0, top: 10, right: 25,bottom: 8),
+                      padding: const EdgeInsets.only(
+                          left: 25.0, top: 10, right: 25, bottom: 8),
                       child: TextField(
                         decoration: InputDecoration(
                           fillColor: Colors.blueGrey.shade200,
@@ -123,8 +110,8 @@ class _LoginState extends State<Login> {
                         color: Colors.blueGrey.shade200,
                         borderRadius: BorderRadius.circular(30)),
                     child: Padding(
-                      padding:
-                          const EdgeInsets.only(left: 25.0, top: 10, right: 25,bottom: 8),
+                      padding: const EdgeInsets.only(
+                          left: 25.0, top: 10, right: 25, bottom: 8),
                       child: TextField(
                         decoration: InputDecoration(
                           fillColor: Colors.blueGrey.shade200,
@@ -163,8 +150,15 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                   SizedBox(height: 20),
-                  Center(
-                    child: Text("Don't have account?"),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (ctx) => Register()));
+                    },
+                    child: Text(
+                      "Don't have account?",
+                      textAlign: TextAlign.end,
+                    ),
                   ),
                   Divider(thickness: 0, color: Colors.white),
                 ],
@@ -174,7 +168,5 @@ class _LoginState extends State<Login> {
         ],
       ),
     ));
-
-    
   }
 }

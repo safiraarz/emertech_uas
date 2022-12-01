@@ -8,7 +8,7 @@ String active_user = "";
 
 Future<String> checkUser() async {
   final prefs = await SharedPreferences.getInstance();
-  String user_id = prefs.getString("user_id") ?? '';
+  String user_id = prefs.getString("id") ?? '';
   return user_id;
 }
 
@@ -43,7 +43,7 @@ class _WelcomeState extends State<Welcome> {
               decoration: BoxDecoration(
                 image: DecorationImage(
                     image: NetworkImage(
-                        'https://images.unsplash.com/photo-1557683316-973673baf926?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE4fHx8ZW58MHx8fHw%3D&w=1000&q=80'),
+                        'https://learn.canva.com/wp-content/uploads/2015/11/desktop-wallpaper.jpg'),
                     fit: BoxFit.fill),
               ),
             ),

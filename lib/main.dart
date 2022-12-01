@@ -1,3 +1,4 @@
+import 'package:daily_meme_digest/screen/addmeme.dart';
 import 'package:daily_meme_digest/screen/home.dart';
 import 'package:daily_meme_digest/screen/leaderboard.dart';
 import 'package:daily_meme_digest/screen/login.dart';
@@ -11,8 +12,8 @@ String active_user = "";
 
 Future<String> checkUser() async {
   final prefs = await SharedPreferences.getInstance();
-  String user_id = prefs.getString("user_id") ?? '';
-  return user_id;
+  String username = prefs.getString("username") ?? '';
+  return username;
 }
 
 void main() {
@@ -22,41 +23,32 @@ void main() {
       runApp(WelcomeHome());
     else {
       active_user = result;
+      print(active_user);
       runApp(MyApp());
     }
   });
 }
 
 void doLogout() async {
-    final prefs = await SharedPreferences.getInstance();
-    prefs.remove("username");
-    main();
-  }
+  final prefs = await SharedPreferences.getInstance();
+  prefs.remove("username");
+  main();
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: {
-        'home': (context) => Home(),
-        'myCreation': (context) => MyCreation(),
+        'home': (context) => Home(username: active_user),
+        'myCreation': (context) => MyCreation(username: active_user),
+        'addMeme': (context) => AddMeme(username: active_user),
         'leaderboard': (context) => Leaderboard(),
         'setting': (context) => Setting(),
       },
       title: 'Daily Meme Digest',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         primarySwatch: Colors.blueGrey,
       ),
       home: const MyHomePage(title: 'Daily Meme Digest'),
@@ -76,12 +68,12 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   int _currentIndex = 0;
   final List<Widget> _screens = [
-    Home(),
-    MyCreation(),
+    Home(username: active_user),
+    MyCreation(username: active_user),
     Leaderboard(),
     Setting()
   ];
-  final List<String> _title = ['home', 'myCreation', 'leaderboard', 'setting'];
+  final List<String> _title = ['Home', 'My Creating', 'Leaderboard', 'Setting'];
 
   void _incrementCounter() {
     setState(() {
@@ -98,18 +90,17 @@ class _MyHomePageState extends State<MyHomePage> {
       body: _screens[_currentIndex],
       drawer: myDrawer(),
       bottomNavigationBar: myBottomNavBar(),
-      // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 
   BottomNavigationBar myBottomNavBar() {
     return BottomNavigationBar(
-      // currentIndex: 0,
-      fixedColor: Colors.teal,
+      fixedColor: Colors.black,
       items: [
         BottomNavigationBarItem(
           label: "Home",
           icon: Icon(Icons.home),
+          backgroundColor: Colors.blueGrey
         ),
         BottomNavigationBarItem(
           label: "My Creation",
@@ -139,6 +130,19 @@ class _MyHomePageState extends State<MyHomePage> {
       child: Column(
         children: <Widget>[
           UserAccountsDrawerHeader(
+              otherAccountsPictures: [
+                GestureDetector(
+                  onTap: () {
+                    doLogout();
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.orange, shape: BoxShape.circle),
+                    padding: EdgeInsets.all(10),
+                    child: Icon(Icons.logout),
+                  ),
+                )
+              ],
               accountName: Text(active_user),
               accountEmail: Text(""),
               currentAccountPicture: CircleAvatar(
@@ -166,12 +170,6 @@ class _MyHomePageState extends State<MyHomePage> {
               leading: new Icon(Icons.settings),
               onTap: () {
                 Navigator.pushNamed(context, "setting");
-              }),
-          ListTile(
-              title: Text("Log Out"),
-              leading: Icon(Icons.logout),
-              onTap: () {
-                doLogout();
               }),
         ],
       ),
