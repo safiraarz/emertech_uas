@@ -215,24 +215,23 @@ class _RegisterState extends State<Register> {
                   ),
                   //button register
                   Container(
-                    height: 65,
-                    padding: const EdgeInsets.only(top: 5, left: 70, right: 70),
-                    child: RaisedButton(
-                      shape: RoundedRectangleBorder(
+                    padding: EdgeInsets.all(10),
+                    child: Container(
+                      height: 50,
+                      width: 300,
+                      decoration: BoxDecoration(
+                          color: Colors.indigo.shade800,
                           borderRadius: BorderRadius.circular(25)),
-                      color: Colors.indigo.shade800,
-                      onPressed: () {
-                        doRegister();
-                      },
-                      child: Text(
-                        'Register',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                          color: Colors.white,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          doRegister();
+                        },
+                        child: Text(
+                          'Register',
+                          style: TextStyle(color: Colors.white, fontSize: 25),
                         ),
                       ),
-                    ),
+                    )
                   ),
                   SizedBox(height: 20),
                   TextButton(

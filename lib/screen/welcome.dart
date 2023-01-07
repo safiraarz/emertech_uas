@@ -83,7 +83,8 @@ class _WelcomeState extends State<Welcome> {
                         width: double.infinity,
                         padding:
                             const EdgeInsets.only(top: 25, left: 24, right: 24),
-                        child: RaisedButton(
+                        child: Container(
+                          child: ElevatedButton(
                           onPressed: () {
                             Navigator.push(
                               context,
@@ -92,12 +93,11 @@ class _WelcomeState extends State<Welcome> {
                               ),
                             );
                           },
-                          elevation: 0,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25),
-                          ),
-                          color: Colors.indigo,
-                          child: Text(
+                          child: Container(
+                            decoration : BoxDecoration(
+                            color: Colors.indigo.shade800,
+                            borderRadius: BorderRadius.circular(25)),
+                          child: const Text(
                             'Log In',
                             style: TextStyle(
                               fontSize: 20,
@@ -106,18 +106,16 @@ class _WelcomeState extends State<Welcome> {
                             ),
                           ),
                         ),
+                          )
+                        )
                       ),
                       Container(
                         height: 80,
                         width: double.infinity,
                         padding:
                             const EdgeInsets.only(top: 25, left: 24, right: 24),
-                        child: RaisedButton(
-                          elevation: 0,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25),
-                          ),
-                          color: Colors.white,
+                        child: Container(
+                          child: ElevatedButton(
                           onPressed: () {
                             Navigator.push(
                               context,
@@ -126,17 +124,21 @@ class _WelcomeState extends State<Welcome> {
                               ),
                             );
                           },
-                          child: Text(
-                            'Create Account',
+                          child: Container(
+                            decoration : BoxDecoration(
+                            color: Colors.indigo.shade800,
+                            borderRadius: BorderRadius.circular(25)),
+                          child: const Text(
+                            'Register',
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.w700,
-                              color: Colors.lightBlue,
+                              color: Colors.white,
                             ),
-                          ),
-                        ),
+                          ),),
+                        )
                       ),
-                    ],
+                      ),],  
                   ),
                 ),
               ],

@@ -238,14 +238,14 @@ class _HomeState extends State<Home> {
                                       icon: Icon(Icons.chat),
                                       iconSize: 30.0,
                                       onPressed: () {
-                                        // Navigator.push(
-                                        //   context,
-                                        //   MaterialPageRoute(
-                                        //     builder: (_) => MemeDetail(
-                                        //       post: posts[index],
-                                        //     ),
-                                        //   ),
-                                        // );
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (_) => MemeDetail(
+                                              //pos: posts[index],
+                                            ),
+                                          ),
+                                        );
                                       },
                                     ),
                                   ],
